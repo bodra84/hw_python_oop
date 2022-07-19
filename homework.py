@@ -12,19 +12,19 @@ class InfoMessage:
                  speed: float,  # средняя скорость пользователя
                  calories: float  # кол-во израсходованных килокал.
                  ) -> None:
-        self.training_type = training_type
+        self.training_type: str = training_type
         self.duration = duration
         self.distance = distance
         self.speed = speed
         self.calories = calories
 
     def get_message(self) -> None:
-        type = f'Тип тренировки: {self.training_type}; '
-        time = f'Длительность: {self.duration:.3f} ч.; '
-        dist = f'Дистанция: {self.distance:.3f} км; '
-        spd = f'Ср. скорость: {self.speed:.3f} км/ч; '
-        clr = f'Потрачено ккал: {self.calories:.3f}.'
-        return(type + time + dist + spd + clr)
+        return (f'Тип тренировки: {self.training_type}; '
+                f'Длительность: {self.duration:.3f} ч.; '
+                f'Дистанция: {self.distance:.3f} км; '
+                f'Ср. скорость: {self.speed:.3f} км/ч; '
+                f'Потрачено ккал: {self.calories:.3f}.'
+                )
 
 
 class Training:
@@ -144,11 +144,10 @@ def read_package(workout_type: str, data: list) -> Training:
                                                 'RUN': Running,
                                                 'WLK': SportsWalking
                                                 }
-    try:
-        if workout_type in training_type:
-            return training_type.get(workout_type)(*data)
-    except AttributeError:
-        return print("Тип тренировки не определен")
+    if workout_type in training_type:
+        return training_type.get(workout_type)(*data)
+    else:
+        raise AttributeError
 
 
 def main(training: Training) -> None:
