@@ -1,30 +1,26 @@
 """Модуль фитнес-трекера."""
 
+from dataclasses import asdict, dataclass
 from typing import Dict, Type
 
 
+@dataclass
 class InfoMessage:
     """Информационное сообщение о тренировке."""
-    def __init__(self,
-                 training_type: str,  # имя класса тренировки
-                 duration: float,  # длительность тренировки в часах
-                 distance: float,  # дистанция в километрах
-                 speed: float,  # средняя скорость пользователя
-                 calories: float  # кол-во израсходованных килокал.
-                 ) -> None:
-        self.training_type: str = training_type
-        self.duration: float = duration
-        self.distance: float = distance
-        self.speed: float = speed
-        self.calories: float = calories
+    training_type: str  # имя класса тренировки
+    duration: float  # длительность тренировки в часах
+    distance: float  # дистанция в километрах
+    speed: float  # средняя скорость пользователя
+    calories: float  # кол-во израсходованных килокал.
+    message: str = ('Тип тренировки: {}; '
+                    'Длительность: {:.3f} ч.; '
+                    'Дистанция: {:.3f} км; '
+                    'Ср. скорость: {:.3f} км/ч; '
+                    'Потрачено ккал: {:.3f}.'
+                    )
 
     def get_message(self) -> str:
-        return (f'Тип тренировки: {self.training_type}; '
-                f'Длительность: {self.duration:.3f} ч.; '
-                f'Дистанция: {self.distance:.3f} км; '
-                f'Ср. скорость: {self.speed:.3f} км/ч; '
-                f'Потрачено ккал: {self.calories:.3f}.'
-                )
+        return self.message.format(*asdict(self).values())
 
 
 class Training:
@@ -52,7 +48,8 @@ class Training:
 
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
-        pass
+        raise NotImplementedError(
+            'Определите get_spent_calories в %s.' % (self.__class__.__name__))
 
     def show_training_info(self) -> InfoMessage:
         """Вернуть информационное сообщение о выполненной тренировке."""
