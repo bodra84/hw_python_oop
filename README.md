@@ -13,7 +13,7 @@ pip install -r requirements.txt
 ```
 python3 homework.py
 ```
-### Авторы/Authors
-Давлат Файзиев / Davlat Faiziev
+### Авторы
+Давлат Файзиев
 
 e-mail: bodra84@gmail.com
