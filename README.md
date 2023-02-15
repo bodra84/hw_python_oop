@@ -9,9 +9,9 @@
 ```
 pip install -r requirements.txt
 ``` 
-- Запустите файл на исполнение:
+- Запустите файл homework.py на исполнение:
 ```
-python3 manage.py
+python3 homework.py
 ```
 ### Авторы/Authors
 Давлат Файзиев / Davlat Faiziev
